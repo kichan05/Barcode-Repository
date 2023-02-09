@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -36,7 +37,12 @@ android {
 }
 
 dependencies {
-    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0' // zxing
+
+    def room_version = "2.3.0" // check latest version from docs
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
