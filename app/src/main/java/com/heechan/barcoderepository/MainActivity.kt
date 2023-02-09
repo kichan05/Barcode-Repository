@@ -1,5 +1,6 @@
 package com.heechan.barcoderepository
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +12,7 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-
-    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
-        if (result.contents == null) {
-            Toast.makeText(this, "바코드 스캔에 실패했습니다.", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Scanned : ${result.contents}", Toast.LENGTH_LONG).show()
-        }
-    }
-
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -29,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val scanClick = { view : View ->
-        val scanOption = ScanOptions()
-        barcodeLauncher.launch(scanOption)
+        val intent = Intent(this, ScanActivity::class.java)
+        startActivity(intent)
     }
 }
